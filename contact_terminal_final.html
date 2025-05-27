@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -45,20 +44,7 @@
       padding: 20px;
       box-shadow: 0 0 15px #0f0;
       position: relative;
-    }
-    .left, .right {
-      width: 50%;
-      box-sizing: border-box;
-    }
-    .left {
-      padding-right: 40px;
-    }
-    .right {
-      border-left: 2px solid #0f0;
-      padding-left: 40px;
-      display: flex;
       flex-direction: column;
-      justify-content: flex-start;
     }
     .form-control {
       background-color: #000;
@@ -71,12 +57,13 @@
       box-sizing: border-box;
     }
     .socials {
-      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
     .socials a {
       color: #0f0;
       text-decoration: none;
-      margin-right: 20px;
       font-size: 16px;
     }
     .footer {
@@ -85,10 +72,8 @@
       font-size: 14px;
     }
     .quote {
-      position: absolute;
-      bottom: 20px;
-      right: 30px;
       font-style: italic;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -102,46 +87,40 @@
   </div>
 
   <div class="neon-box">
-    <div class="left">
-      <div id="ua-form">
-        <h3>Звʼязатись із Your Legist</h3>
-        <form action="https://formspree.io/f/xayrzldo" method="POST">
-          <input type="text" name="name" placeholder="Як вас звати" required class="form-control">
-          <input type="text" name="telegram" placeholder="Ваш Telegram або інший контакт. Уточніть, в якій соцмережі" required class="form-control">
-          <textarea name="message" placeholder="Коротко суть звернення" rows="4" required class="form-control"></textarea>
-          <button type="submit" class="form-control">Надіслати</button>
-        </form>
-      </div>
-      <div id="en-form" style="display:none;">
-        <h3>Contact Your Legist</h3>
-        <form action="https://formspree.io/f/xayrzldo" method="POST">
-          <input type="text" name="name" placeholder="Your name" required class="form-control">
-          <input type="text" name="telegram" placeholder="Your Telegram or other contact. Specify the platform" required class="form-control">
-          <textarea name="message" placeholder="Brief description of your request" rows="4" required class="form-control"></textarea>
-          <button type="submit" class="form-control">Send</button>
-        </form>
-      </div>
-      <div class="socials">
-        <a href="mailto:your.legist@gmail.com">📧 Gmail</a>
-        <a href="https://www.instagram.com/your.legist">📷 Instagram</a>
-        <a href="https://www.facebook.com/share/1Aq9U3s8PU/?mibextid=wwXIfr">📘 Facebook</a>
-        <a href="https://x.com/your_legist?s=21&t=9T-ETu8Z3axxKcKuk2YH9A">❌ X</a>
-      </div>
+    <div id="ua-form">
+      <h3>Звʼязатись із Your Legist</h3>
+      <form action="https://formspree.io/f/xovdgepy" method="POST">
+        <input type="text" name="name" placeholder="Як вас звати" required class="form-control">
+        <input type="text" name="telegram" placeholder="Ваш Telegram або інший контакт. Уточніть, в якій соцмережі" required class="form-control">
+        <textarea name="message" placeholder="Коротко суть звернення" rows="4" required class="form-control"></textarea>
+        <button type="submit" class="form-control">Надіслати</button>
+      </form>
     </div>
-    <div class="right">
-      <div id="ua-text">
-        <p>Тут не запитують зайвого.<br>Тут просто вирішують питання.</p>
-      </div>
-      <div id="en-text" style="display:none;">
-        <p>No unnecessary questions.<br>Only solutions.</p>
-      </div>
+    <div id="en-form" style="display:none;">
+      <h3>Contact Your Legist</h3>
+      <form action="https://formspree.io/f/xovdgepy" method="POST">
+        <input type="text" name="name" placeholder="Your name" required class="form-control">
+        <input type="text" name="telegram" placeholder="Your Telegram or other contact. Specify the platform" required class="form-control">
+        <textarea name="message" placeholder="Brief description of your request" rows="4" required class="form-control"></textarea>
+        <button type="submit" class="form-control">Send</button>
+      </form>
     </div>
-    <div class="quote">“Що не підписане — те не написане.”</div>
+    <div class="quote" id="ua-text">
+      Тут не запитують зайвого. Тут просто вирішують питання.</br>
+      </br>
+    </div>
+    <div class="quote" id="en-text" style="display: none;">
+      No unnecessary questions. Only solutions.
+    </div>
+    <div class="socials">
+      <a href="mailto:your.legist@gmail.com">📧 Gmail</a>
+      <a href="https://www.instagram.com/your.legist">📷 Instagram</a>
+      <a href="https://www.facebook.com/share/1Aq9U3s8PU/?mibextid=wwXIfr">📘 Facebook</a>
+      <a href="https://x.com/your_legist?s=21&t=9T-ETu8Z3axxKcKuk2YH9A">❌ X</a>
+    </div>
   </div>
 
-  <div class="footer">
-    Конфіденційність | Публічна оферта
-  </div>
+  <div class="footer">Конфіденційність | Публічна оферта</div>
 
   <script>
     function switchLang(lang) {
@@ -149,42 +128,8 @@
       document.getElementById("en-form").style.display = (lang === 'en') ? "block" : "none";
       document.getElementById("ua-text").style.display = (lang === 'ua') ? "block" : "none";
       document.getElementById("en-text").style.display = (lang === 'en') ? "block" : "none";
-      document.querySelector(".quote").textContent = (lang === 'ua') ?
-        "“Що не підписане — те не написане.”" : "“What’s not signed — doesn’t exist.”";
     }
+    switchLang('ua');
   </script>
-
-
-
-
-<script>
-  const uaForm = document.getElementById('ua-form');
-  const enForm = document.getElementById('en-form');
-  const uaText = document.getElementById('ua-text');
-  const enText = document.getElementById('en-text');
-  const uaBtn = document.querySelector('button[onclick="switchLang(\'ua\')"]');
-  const enBtn = document.querySelector('button[onclick="switchLang(\'en\')"]');
-  const quote = document.querySelector(".quote");
-
-  function switchLang(lang) {
-    if (lang === 'ua') {
-      uaForm.style.display = 'block';
-      enForm.style.display = 'none';
-      uaText.style.display = 'block';
-      enText.style.display = 'none';
-      quote.textContent = "“Що не підписане — те не написане.”";
-    } else {
-      uaForm.style.display = 'none';
-      enForm.style.display = 'block';
-      uaText.style.display = 'none';
-      enText.style.display = 'block';
-      quote.textContent = "“What’s not signed — doesn’t exist.”";
-    }
-  }
-
-  // Set UA as default on load
-  switchLang('ua');
-</script>
 </body>
-
 </html>
