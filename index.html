@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Legist Terminal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 20px;
+            background-color: #000;
+            color: #0f0;
+            font-family: 'Courier New', Courier, monospace;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #terminal {
+            border: 4px solid #0f0;
+            padding: 30px;
+            box-shadow: 0 0 15px #0f0;
+            max-width: 700px;
+            text-align: center;
+            width: 100%;
+        }
+        button {
+            background-color: #000;
+            border: 1px solid #0f0;
+            color: #0f0;
+            padding: 10px 20px;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 10px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0f0;
+            color: #000;
+        }
+        .hidden {
+            display: none;
+        }
+        .lang-switch {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        .lang-switch button {
+            background-color: black;
+            color: #0f0;
+            border: 1px solid #0f0;
+            margin-right: 5px;
+            padding: 4px 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="lang-switch">
+        <button onclick="switchLang('ua')">UA</button>
+        <button onclick="switchLang('en')">EN</button>
+    </div>
+    <div id="terminal">
+        <div id="output"></div>
+        <div id="question" class="hidden">
+            <p id="questionText">Ви тут, щоб бути юридично захищеними?</p>
+            <button onclick="yes()">Так</button>
+            <button onclick="no()">Ні</button>
+        </div>
+        <div id="response" class="hidden"></div>
+    </div>
+
+    <script>
+        const output = document.getElementById('output');
+        const question = document.getElementById('question');
+        const response = document.getElementById('response');
+        const questionText = document.getElementById('questionText');
+        const langSwitch = document.querySelector('.lang-switch');
+        let lang = "ua";
+
+        const greetings = {
+            ua: "Hello, Діджиталізовані!",
+            en: "Hello, Digitalized!"
+        };
+
+        const prompts = {
+            ua: "Ви тут, щоб бути юридично захищеними?",
+            en: "Are you here to be legally protected?"
+        };
+
+        const buttons = {
+            ua: ["Так", "Ні"],
+            en: ["Yes", "No"]
+        };
+
+        const noResponse = {
+            ua: "Цей шлях — не ваш. І це теж вибір.<br><br>Але пам’ятайте: незахищений бізнес — легка ціль.",
+            en: "This path isn’t yours — and that’s a choice too.<br><br>But remember: an unprotected business is an easy target."
+        };
+
+        let i = 0;
+        let greeting = greetings[lang];
+
+        function typeLine() {
+            if (i < greeting.length) {
+                output.textContent += greeting.charAt(i);
+                i++;
+                setTimeout(typeLine, 75);
+            } else {
+                setTimeout(() => {
+                    showQuestion();
+                }, 500);
+            }
+        }
+
+        function showQuestion() {
+            questionText.innerHTML = prompts[lang];
+            question.children[1].innerText = buttons[lang][0];
+            question.children[2].innerText = buttons[lang][1];
+            question.classList.remove('hidden');
+        }
+
+        function yes() {
+            window.location.href = 'about_terminal_final.html';
+        }
+
+        function no() {
+            question.classList.add('hidden');
+            response.classList.remove('hidden');
+            response.innerHTML = noResponse[lang];
+        }
+
+        function switchLang(selectedLang) {
+            lang = selectedLang;
+            output.textContent = "";
+            i = 0;
+            question.classList.add('hidden');
+            response.classList.add('hidden');
+            greeting = greetings[lang];
+            typeLine();
+        }
+
+        window.onload = () => {
+            typeLine();
+        }
+    </script>
+</body>
+</html>

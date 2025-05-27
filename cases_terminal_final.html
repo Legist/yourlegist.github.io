@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Legist | Кейси</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #000;
+      color: #0f0;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      flex-direction: column;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+    .lang-switch {
+      display: flex;
+      gap: 10px;
+    }
+    .lang-switch button {
+      background: none;
+      border: 1px solid #0f0;
+      color: #0f0;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+    .brand {
+      border: 1px solid #0f0;
+      padding: 6px 14px;
+      font-weight: bold;
+    }
+    .neon-box {
+      flex-grow: 1;
+      border: 4px solid #0f0;
+      margin: 10px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 15px #0f0;
+      position: relative;
+      overflow-y: auto;
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .nav-buttons a {
+      border: 1px solid #0f0;
+      padding: 6px 12px;
+      text-decoration: none;
+      color: #0f0;
+    }
+    .nav-buttons a:hover {
+      background-color: #0f0;
+      color: #000;
+    }
+    .output {
+      white-space: pre-wrap;
+      word-break: break-word;
+      flex-grow: 1;
+    }
+    .quote {
+      text-align: right;
+      font-style: italic;
+      margin-top: 20px;
+    }
+    .footer {
+      padding: 10px 20px;
+      display: flex;
+      gap: 20px;
+      font-size: 14px;
+      align-items: center;
+    }
+    .footer a {
+      color: #0f0;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="lang-switch">
+      <button onclick="switchLang('ua')">UA</button>
+      <button onclick="switchLang('en')">EN</button>
+    </div>
+    <div class="brand">Your LEGIST</div>
+  </div>
+
+  <div class="neon-box">
+    <div class="nav-buttons">
+      <a href="about_terminal_final.html">Про нас</a>
+      <a href="services_terminal_final.html">Послуги</a>
+      <a href="cases_terminal_final.html">Кейси</a>
+      <a href="contact_terminal_final.html">Контакти</a>
+    </div>
+    <div id="output" class="output"></div>
+    <div id="quote" class="quote">“Що не підписане — те не написане.”</div>
+  </div>
+
+  <div class="footer">
+    <a href="privacy.html">Конфіденційність</a>
+    <a href="offer.html">Публічна оферта</a>
+  </div>
+
+  <script>
+    const texts = {
+      ua: `✦ Повернули доступ до двох Instagram-сторінок публічної особи з аудиторією понад 0,5 млн підписників після хакерської атаки. Провели переговори з Meta, підтвердили авторство, підготували докази.
+
+✦ Супровід запуску онлайн-курсу в США. Освітній стартап вийшов на англомовну аудиторію. Ми підготували: ліцензійний договір, угоду користувача, політику конфіденційності відповідно до GDPR і DMCA.`,
+      en: `✦ Recovered access to two Instagram accounts of a public figure with over 0.5M followers after a hacker attack. Negotiated with Meta, proved authorship, and prepared evidence.
+
+✦ Legal support for launching an online course in the US. The EdTech startup targeted an English-speaking audience. We drafted a license agreement, user terms, and privacy policy in compliance with GDPR and DMCA.`
+    };
+    const quotes = {
+      ua: "“Що не підписане — те не написане.”",
+      en: "\"What’s not signed — doesn’t exist.\""
+    };
+    let currentLang = 'ua';
+    let index = 0;
+    let currentText = texts[currentLang];
+    const output = document.getElementById('output');
+    const quote = document.getElementById('quote');
+
+    function typeText() {
+      if (index < currentText.length) {
+        output.textContent += currentText.charAt(index);
+        index++;
+        setTimeout(typeText, 25);
+      }
+    }
+
+    function switchLang(lang) {
+      const lastIndex = index;
+      currentLang = lang;
+      currentText = texts[currentLang];
+      output.textContent = currentText.slice(0, lastIndex);
+      quote.textContent = quotes[currentLang];
+      index = lastIndex;
+      typeText();
+    }
+
+    typeText();
+  </script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Legist | Послуги</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #000;
+      color: #0f0;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      flex-direction: column;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+    .lang-switch {
+      display: flex;
+      gap: 10px;
+    }
+    .lang-switch button {
+      background: none;
+      border: 1px solid #0f0;
+      color: #0f0;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+    .brand {
+      border: 1px solid #0f0;
+      padding: 6px 14px;
+      font-weight: bold;
+    }
+    .neon-box {
+      flex-grow: 1;
+      border: 4px solid #0f0;
+      margin: 10px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 15px #0f0;
+      position: relative;
+      overflow-y: auto;
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .nav-buttons a {
+      border: 1px solid #0f0;
+      padding: 6px 12px;
+      text-decoration: none;
+      color: #0f0;
+    }
+    .nav-buttons a:hover {
+      background-color: #0f0;
+      color: #000;
+    }
+    .output {
+      white-space: pre-wrap;
+      word-break: break-word;
+      flex-grow: 1;
+    }
+    .quote {
+      text-align: right;
+      font-style: italic;
+      margin-top: 20px;
+    }
+    .footer {
+      padding: 10px 20px;
+      display: flex;
+      gap: 20px;
+      font-size: 14px;
+      align-items: center;
+    }
+    .footer a {
+      color: #0f0;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="lang-switch">
+      <button onclick="switchLang('ua')">UA</button>
+      <button onclick="switchLang('en')">EN</button>
+    </div>
+    <div class="brand">Your LEGIST</div>
+  </div>
+
+  <div class="neon-box">
+    <div class="nav-buttons">
+      <a href="about_terminal_final.html">Про нас</a>
+      <a href="services_terminal_final.html">Послуги</a>
+      <a href="cases_terminal_final.html">Кейси</a>
+      <a href="contact_terminal_final.html">Контакти</a>
+    </div>
+    <div id="output" class="output"></div>
+    <div id="quote" class="quote">“Що не підписане — те не написане.”</div>
+  </div>
+
+  <div class="footer">
+    <a href="privacy.html">Конфіденційність</a>
+    <a href="offer.html">Публічна оферта</a>
+  </div>
+
+  <script>
+    const texts = {
+      ua: `🔹 Твій бренд — твоя власність
+- Зареєструємо торгову марку або авторське право — офіційно, швидко, з гарантією результату.
+- Перевіримо унікальність назви, підготуємо відповіді на відмови.
+- Підтримаємо в колабораціях, запуску нової лінійки чи курсу.
+
+🔹 Бізнес без юридичних дірок
+- Відкриття ФОП або ТОВ. Все офіційно — із захистом від штрафів і непорозумінь.
+- Договори з партнерами, клієнтами, командою. Усе чітко: хто, за що, коли й скільки.
+- Аудит і оновлення старих документів.
+
+🔹 Авторське — це гроші
+- Права на контент, ліцензії, зйомки, подкасти — все оформимо так, щоб захистити прибуток.
+- Умови співпраці з інфлюенсерами, дизайнерами, розробниками.
+
+🔹 Репутація = капітал
+- Видалення негативу, фейків, маніпуляцій із Google та соцмереж.
+- Претензії, листи, переговори — усе, щоб уникнути суду й стресу.
+
+🔹 Політика, яка працює
+- GDPR, політики конфіденційності, угоди користувача — як для сайтів, так і для онлайн-продуктів.`,
+      en: `🔹 Your brand — your property
+- We will register a trademark or copyright — officially, quickly, with guaranteed results.
+- We’ll check name uniqueness and prepare responses to refusals.
+- We’ll support in collaborations, product lines or course launches.
+
+🔹 Business without legal holes
+- FOP or LLC registration. Fully legal — protected from fines and misunderstandings.
+- Agreements with partners, clients, and team. Clear terms: who, what, when, and how much.
+- Audit and update of old documents.
+
+🔹 Copyright means money
+- Rights for content, licenses, shootings, podcasts — everything documented to secure your income.
+- Terms for working with influencers, designers, and developers.
+
+🔹 Reputation = capital
+- Removal of negativity, fakes, and manipulations from Google and social networks.
+- Claims, letters, negotiations — everything to avoid court and stress.
+
+🔹 Policy that works
+- GDPR, privacy policies, user agreements — for websites and digital products.`
+    };
+    const quotes = {
+      ua: "“Що не підписане — те не написане.”",
+      en: "\"What’s not signed — doesn’t exist.\""
+    };
+    let currentLang = 'ua';
+    let index = 0;
+    let currentText = texts[currentLang];
+    const output = document.getElementById('output');
+    const quote = document.getElementById('quote');
+
+    function typeText() {
+      if (index < currentText.length) {
+        output.textContent += currentText.charAt(index);
+        index++;
+        setTimeout(typeText, 25);
+      }
+    }
+
+    function switchLang(lang) {
+      const lastIndex = index;
+      currentLang = lang;
+      currentText = texts[currentLang];
+      output.textContent = currentText.slice(0, lastIndex);
+      quote.textContent = quotes[currentLang];
+      index = lastIndex;
+      typeText();
+    }
+
+    typeText();
+  </script>
+</body>
+</html>

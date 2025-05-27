@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Success — Your Legist</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 20px;
+      background-color: #000;
+      color: #0f0;
+      font-family: 'Courier New', Courier, monospace;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .neon-box {
+      border: 3px solid #0f0;
+      padding: 30px;
+      width: 90%;
+      max-width: 700px;
+      text-align: center;
+      box-shadow: 0 0 15px #0f0;
+    }
+    .lang-switch {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+    .lang-switch button {
+      background-color: black;
+      color: #0f0;
+      border: 1px solid #0f0;
+      margin-right: 5px;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+    .quote {
+      margin-top: 40px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="lang-switch">
+    <button onclick="switchLang('ua')">UA</button>
+    <button onclick="switchLang('en')">EN</button>
+  </div>
+  <div class="neon-box">
+    <div id="ua-success">
+      <h2>Заявку надіслано!</h2>
+      <p>Ми отримали ваше звернення. Найближчим часом з вами зв’яжемося.</p>
+      
+    </div>
+    <div id="en-success" style="display:none;">
+      <h2>Request sent!</h2>
+      <p>We’ve received your message. We’ll contact you shortly.</p>
+      
+    </div>
+  </div>
+
+  <script>
+    function switchLang(lang) {
+      document.getElementById("ua-success").style.display = lang === "ua" ? "block" : "none";
+      document.getElementById("en-success").style.display = lang === "en" ? "block" : "none";
+    }
+  </script>
+</body>
+</html>
