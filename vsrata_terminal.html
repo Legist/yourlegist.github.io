@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Всрата Юрня | 12 Таблиць</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #0f0;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+    .lang-switch button {
+      background: none;
+      border: 1px solid #0f0;
+      color: #0f0;
+      padding: 4px 8px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .brand {
+      border: 1px solid #0f0;
+      padding: 6px 14px;
+      font-weight: bold;
+    }
+    .neon-box {
+      flex-grow: 1;
+      border: 4px solid #0f0;
+      margin: 10px;
+      padding: 20px;
+      box-shadow: 0 0 15px #0f0;
+      position: relative;
+      overflow-y: auto;
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .nav-buttons a {
+      border: 1px solid #0f0;
+      padding: 6px 12px;
+      text-decoration: none;
+      color: #0f0;
+      background: #000;
+      transition: all 0.2s;
+    }
+    .nav-buttons a:hover {
+      background-color: #0f0;
+      color: #000;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      justify-items: center;
+    }
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .tile {
+      border: 2px solid #0f0;
+      padding: 20px;
+      width: 90%;
+      background: linear-gradient(135deg, rgba(0,255,0,0.05), rgba(0,255,0,0.1));
+      box-shadow: 0 0 10px #0f0, inset 0 0 5px #0f0;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .tile:hover {
+      transform: scale(1.03);
+    }
+    .tile h3 {
+      margin-top: 0;
+      border-bottom: 1px solid #0f0;
+      padding-bottom: 5px;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin: 60px 0 40px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-top: 2px solid #0f0;
+      border-bottom: 2px solid #0f0;
+      padding: 10px 0;
+      box-shadow: 0 0 10px #0f0;
+    }
+    .footer {
+      padding: 10px 20px;
+      display: flex;
+      gap: 20px;
+      font-size: 14px;
+    }
+    .footer a {
+      color: #0f0;
+      text-decoration: none;
+    }
+    .vsrata {
+      margin-left: 3cm;
+    }
+    @media (max-width: 600px) {
+      .nav-buttons {
+        flex-wrap: wrap;
+      }
+      .vsrata {
+        margin-left: 0;
+        margin-top: 10px;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="lang-switch">
+      <button onclick="switchLang('ua')">UA</button>
+      <button onclick="switchLang('en')">EN</button>
+    </div>
+    <div class="brand">Your LEGIST</div>
+  </div>
+  <div class="neon-box">
+    <div class="nav-buttons">
+      <a href="about_terminal_final.html" class="nav-link" data-ua="Про нас" data-en="About">Про нас</a>
+      <a href="services_terminal_final.html" class="nav-link" data-ua="Послуги" data-en="Services">Послуги</a>
+      <a href="cases_terminal_final.html" class="nav-link" data-ua="Кейси" data-en="Cases">Кейси</a>
+      <a href="contact_terminal_final.html" class="nav-link" data-ua="Контакти" data-en="Contacts">Контакти</a>
+      <a href="vsrata_terminal.html" class="nav-link vsrata" data-ua="Всрата юрня" data-en="Legal Jurnya">Всрата юрня</a>
+    </div>
+    <div class="section-title" id="titleText">12 Всраточних Таблиць Юрні</div>
+    <div class="grid" id="tableGrid"></div>
+  </div>
+  <div class="footer">
+    <a href="privacy.html" class="footer-text" data-ua="Конфіденційність" data-en="Privacy Policy">Конфіденційність</a> |
+    <a href="offer.html" class="footer-text" data-ua="Публічна оферта" data-en="Public Offer">Публічна оферта</a>
+  </div>
+  <script>
+    const tables = {
+      ua: [
+        'Таблиця I: Про виклики до суду',
+        'Таблиця II: Про судовий процес',
+        'Таблиця III: Про борги',
+        'Таблиця IV: Про владу батька',
+        'Таблиця V: Про спадщину і охорону',
+        'Таблиця VI: Про володіння та майно',
+        'Таблиця VII: Про злочини та відшкодування',
+        'Таблиця VIII: Про шлюб',
+        'Таблиця IX: Про злочини проти держави',
+        'Таблиця X: Про похорон',
+        'Таблиця XI: Про заборони шлюбу',
+        'Таблиця XII: Про доповнення'
+      ],
+      en: [
+        'Table I: Procedure for Court Summons',
+        'Table II: Procedure for Trial',
+        'Table III: Debt and Repayment',
+        'Table IV: Paternal Authority',
+        'Table V: Inheritance and Guardianship',
+        'Table VI: Property and Ownership',
+        'Table VII: Crimes and Compensation',
+        'Table VIII: Marriage Laws',
+        'Table IX: State Offenses',
+        'Table X: Burial Regulations',
+        'Table XI: Marriage Restrictions',
+        'Table XII: Supplementary Laws'
+      ]
+    };
+    function renderGrid(lang) {
+      const grid = document.getElementById('tableGrid');
+      grid.innerHTML = '';
+      tables[lang].forEach((text, i) => {
+        const div = document.createElement('div');
+        div.className = 'tile';
+        div.innerHTML = `<h3>${text}</h3><p>Lorem ipsum dolor sit amet...</p>`;
+        grid.appendChild(div);
+      });
+    }
+    function switchLang(lang) {
+      renderGrid(lang);
+      document.getElementById('titleText').textContent = (lang === 'ua') ? '12 Всраточних Таблиць Юрні' : '12 Legal Jurnya Tables';
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.textContent = lang === 'ua' ? link.getAttribute('data-ua') : link.getAttribute('data-en');
+      });
+      document.querySelectorAll('.footer-text').forEach(el => {
+        el.textContent = lang === 'ua' ? el.getAttribute('data-ua') : el.getAttribute('data-en');
+      });
+    }
+    switchLang('ua');
+  </script>
+</body>
+</html>
