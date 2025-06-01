@@ -46,6 +46,32 @@
       position: relative;
       flex-direction: column;
     }
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .nav-buttons a {
+      border: 1px solid #0f0;
+      padding: 6px 12px;
+      text-decoration: none;
+      color: #0f0;
+    }
+    .nav-buttons a:hover {
+      background-color: #0f0;
+      color: #000;
+    }
+    .vsrata {
+      margin-left: 3cm;
+    }
+    @media (max-width: 600px) {
+      .vsrata {
+        margin-left: 0;
+        margin-top: 10px;
+        width: 100%;
+      }
+    }
     .form-control {
       background-color: #000;
       border: 1px solid #0f0;
@@ -67,9 +93,14 @@
       font-size: 16px;
     }
     .footer {
-      color: #0f0;
       padding: 10px 20px;
+      display: flex;
+      gap: 20px;
       font-size: 14px;
+    }
+    .footer a {
+      color: #0f0;
+      text-decoration: none;
     }
     .quote {
       font-style: italic;
@@ -79,14 +110,23 @@
 </head>
 <body>
   <div class="topbar">
-    <div class="lang-switch">
-      <button onclick="switchLang('ua')">UA</button>
-      <button onclick="switchLang('en')">EN</button>
-    </div>
-    <div class="brand">Your LEGIST</div>
+  <div class="lang-switch">
+    <button onclick="switchLang('ua')" style="padding: 4px 8px; font-size: 14px; border: 1px solid #0f0; background: none; color: #0f0; cursor: pointer;">UA</button>
+    <button onclick="switchLang('en')" style="padding: 4px 8px; font-size: 14px; border: 1px solid #0f0; background: none; color: #0f0; cursor: pointer;">EN</button>
   </div>
+  <div class="brand">Your LEGIST</div>
+</div>
+
 
   <div class="neon-box">
+    <div class="nav-buttons">
+      <a href="about_terminal_final.html" class="nav-link" data-ua="Про нас" data-en="About">Про нас</a>
+      <a href="services_terminal_final.html" class="nav-link" data-ua="Послуги" data-en="Services">Послуги</a>
+      <a href="cases_terminal_final.html" class="nav-link" data-ua="Кейси" data-en="Cases">Кейси</a>
+      <a href="contact_terminal_final.html" class="nav-link" data-ua="Контакти" data-en="Contacts">Контакти</a>
+      <a href="vsrata_terminal.html" class="nav-link vsrata" data-ua="Всрата юрня" data-en="Legal Jurnya">Всрата юрня</a>
+    </div>
+
     <div id="ua-form">
       <h3>Звʼязатись із Your Legist</h3>
       <form action="https://formspree.io/f/xovdgepy" method="POST">
@@ -105,13 +145,14 @@
         <button type="submit" class="form-control">Send</button>
       </form>
     </div>
+
     <div class="quote" id="ua-text">
-      Тут не запитують зайвого. Тут просто вирішують питання.</br>
-      </br>
+      Тут не запитують зайвого. Тут просто вирішують питання.</br></br>
     </div>
     <div class="quote" id="en-text" style="display: none;">
       No unnecessary questions. Only solutions.
     </div>
+
     <div class="socials">
       <a href="mailto:your.legist@gmail.com">📧 Gmail</a>
       <a href="https://www.instagram.com/your.legist">📷 Instagram</a>
@@ -120,16 +161,25 @@
     </div>
   </div>
 
-  <div class="footer">Конфіденційність | Публічна оферта</div>
+  <div class="footer">
+    <a href="privacy.html" class="footer-text" data-ua="Конфіденційність" data-en="Privacy Policy">Конфіденційність</a>|
+    <span class="footer-text" data-ua="Публічна оферта" data-en="Public Offer">Публічна оферта</span>
+  </div>
 
   <script>
-    function switchLang(lang) {
-      document.getElementById("ua-form").style.display = (lang === 'ua') ? "block" : "none";
-      document.getElementById("en-form").style.display = (lang === 'en') ? "block" : "none";
-      document.getElementById("ua-text").style.display = (lang === 'ua') ? "block" : "none";
-      document.getElementById("en-text").style.display = (lang === 'en') ? "block" : "none";
-    }
-    switchLang('ua');
+ function switchLang(lang) {
+    document.getElementById("ua-form").style.display = (lang === 'ua') ? "block" : "none";
+    document.getElementById("en-form").style.display = (lang === 'en') ? "block" : "none";
+    document.getElementById("ua-text").style.display = (lang === 'ua') ? "block" : "none";
+    document.getElementById("en-text").style.display = (lang === 'en') ? "block" : "none";
+    document.querySelectorAll('.footer-text').forEach(el => {
+      el.textContent = (lang === 'ua') ? el.getAttribute('data-ua') : el.getAttribute('data-en');
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.textContent = (lang === 'ua') ? link.getAttribute('data-ua') : link.getAttribute('data-en');
+    });
+  }
+  switchLang('ua');
   </script>
 </body>
 </html>

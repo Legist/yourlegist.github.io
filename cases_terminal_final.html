@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -53,6 +52,7 @@
       display: flex;
       gap: 10px;
       margin-bottom: 20px;
+      flex-wrap: wrap;
     }
     .nav-buttons a {
       border: 1px solid #0f0;
@@ -63,6 +63,16 @@
     .nav-buttons a:hover {
       background-color: #0f0;
       color: #000;
+    }
+    .vsrata {
+      margin-left: 3cm;
+    }
+    @media (max-width: 600px) {
+      .vsrata {
+        margin-left: 0;
+        margin-top: 10px;
+        width: 100%;
+      }
     }
     .output {
       white-space: pre-wrap;
@@ -95,23 +105,21 @@
     </div>
     <div class="brand">Your LEGIST</div>
   </div>
-
   <div class="neon-box">
     <div class="nav-buttons">
-      <a href="about_terminal_final.html">Про нас</a>
-      <a href="services_terminal_final.html">Послуги</a>
-      <a href="cases_terminal_final.html">Кейси</a>
-      <a href="contact_terminal_final.html">Контакти</a>
+      <a href="about_terminal_final.html" class="nav-link" data-ua="Про нас" data-en="About">Про нас</a>
+      <a href="services_terminal_final.html" class="nav-link" data-ua="Послуги" data-en="Services">Послуги</a>
+      <a href="cases_terminal_final.html" class="nav-link" data-ua="Кейси" data-en="Cases">Кейси</a>
+      <a href="contact_terminal_final.html" class="nav-link" data-ua="Контакти" data-en="Contacts">Контакти</a>
+      <a href="vsrata_terminal.html" class="nav-link vsrata" data-ua="Всрата юрня" data-en="Legal Jurnya">Всрата юрня</a>
     </div>
     <div id="output" class="output"></div>
     <div id="quote" class="quote">“Що не підписане — те не написане.”</div>
   </div>
-
   <div class="footer">
-    <a href="privacy.html">Конфіденційність</a>
-    <a href="offer.html">Публічна оферта</a>
+    <a href="privacy.html" class="footer-text" data-ua="Конфіденційність" data-en="Privacy Policy">Конфіденційність</a>|
+    <span class="footer-text" data-ua="Публічна оферта" data-en="Public Offer">Публічна оферта</span>
   </div>
-
   <script>
     const texts = {
       ua: `✦ Повернули доступ до двох Instagram-сторінок публічної особи з аудиторією понад 0,5 млн підписників після хакерської атаки. Провели переговори з Meta, підтвердили авторство, підготували докази.
@@ -145,6 +153,12 @@
       currentText = texts[currentLang];
       output.textContent = currentText.slice(0, lastIndex);
       quote.textContent = quotes[currentLang];
+      document.querySelectorAll('.footer-text').forEach(el => {
+        el.textContent = lang === 'ua' ? el.getAttribute('data-ua') : el.getAttribute('data-en');
+      });
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.textContent = lang === 'ua' ? link.getAttribute('data-ua') : link.getAttribute('data-en');
+      });
       index = lastIndex;
       typeText();
     }

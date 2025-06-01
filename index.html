@@ -76,7 +76,6 @@
         const question = document.getElementById('question');
         const response = document.getElementById('response');
         const questionText = document.getElementById('questionText');
-        const langSwitch = document.querySelector('.lang-switch');
         let lang = "ua";
 
         const greetings = {
@@ -95,8 +94,8 @@
         };
 
         const noResponse = {
-            ua: "Цей шлях — не ваш. І це теж вибір.<br><br>Але пам’ятайте: незахищений бізнес — легка ціль.",
-            en: "This path isn’t yours — and that’s a choice too.<br><br>But remember: an unprotected business is an easy target."
+            ua: "<br>Цей шлях — не ваш. І це теж вибір.<br><br>Але пам’ятайте: незахищений бізнес — легка ціль.",
+            en: "<br>This path isn’t yours — and that’s a choice too.<br><br>But remember: an unprotected business is an easy target."
         };
 
         let i = 0;
@@ -114,6 +113,14 @@
             }
         }
 
+        function typeLineWoops() {
+            if (lang === "ua") {
+                output.textContent = "Ууупс...";
+            } else {
+                output.textContent = "Wooops...";
+            }
+        }
+
         function showQuestion() {
             questionText.innerHTML = prompts[lang];
             question.children[1].innerText = buttons[lang][0];
@@ -128,7 +135,11 @@
         function no() {
             question.classList.add('hidden');
             response.classList.remove('hidden');
-            response.innerHTML = noResponse[lang];
+            output.textContent = "";
+            typeLineWoops();
+            setTimeout(() => {
+                response.innerHTML = noResponse[lang];
+            }, 1000);
         }
 
         function switchLang(selectedLang) {
