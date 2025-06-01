@@ -79,15 +79,31 @@
       background: linear-gradient(135deg, rgba(0,255,0,0.05), rgba(0,255,0,0.1));
       box-shadow: 0 0 10px #0f0, inset 0 0 5px #0f0;
       text-align: center;
-      transition: transform 0.2s;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      cursor: pointer;
+      opacity: 0;
     }
     .tile:hover {
-      transform: scale(1.03);
+      transform: scale(1.05);
     }
     .tile h3 {
-      margin-top: 0;
-      border-bottom: 1px solid #0f0;
-      padding-bottom: 5px;
+      background-color: #0f0;
+      color: #000;
+      padding: 10px;
+      margin: 0 0 10px 0;
+      font-weight: bold;
+      font-size: 18px;
+      border-radius: 4px;
+    }
+    .tile .divider {
+      height: 2px;
+      background: #0f0;
+      margin: 10px 0;
+      box-shadow: 0 0 5px #0f0;
+    }
+    .tile p {
+      text-align: left;
+      margin: 0;
     }
     .section-title {
       text-align: center;
@@ -150,49 +166,54 @@
     <a href="offer.html" class="footer-text" data-ua="Публічна оферта" data-en="Public Offer">Публічна оферта</a>
   </div>
   <script>
-    const tables = {
-      ua: [
-        'Таблиця I: Про виклики до суду',
-        'Таблиця II: Про судовий процес',
-        'Таблиця III: Про борги',
-        'Таблиця IV: Про владу батька',
-        'Таблиця V: Про спадщину і охорону',
-        'Таблиця VI: Про володіння та майно',
-        'Таблиця VII: Про злочини та відшкодування',
-        'Таблиця VIII: Про шлюб',
-        'Таблиця IX: Про злочини проти держави',
-        'Таблиця X: Про похорон',
-        'Таблиця XI: Про заборони шлюбу',
-        'Таблиця XII: Про доповнення'
-      ],
-      en: [
-        'Table I: Procedure for Court Summons',
-        'Table II: Procedure for Trial',
-        'Table III: Debt and Repayment',
-        'Table IV: Paternal Authority',
-        'Table V: Inheritance and Guardianship',
-        'Table VI: Property and Ownership',
-        'Table VII: Crimes and Compensation',
-        'Table VIII: Marriage Laws',
-        'Table IX: State Offenses',
-        'Table X: Burial Regulations',
-        'Table XI: Marriage Restrictions',
-        'Table XII: Supplementary Laws'
-      ]
-    };
+    const uaTitles = [
+      ['СудоШок', '🧾 виклики, позови, судовий процес'],
+      ['Борговий серіал', '💸 борги, виконавча, повернення бабла'],
+      ['Договорозгублені', '📄 договірна база з креаторами, фрилансерами, клієнтами'],
+      ['Авторство – не “ой, я зробив”', '✍️ copyright, контент, інтернет і справжні права'],
+      ['Бартер на граблі', '📸 колаби, інфлюенсери, рекламні інтеграції'],
+      ['Забрендився — захистись', '™️ торговельні марки, назви, лого, неймінг'],
+      ['Нейросітка наробила', '🤖 AI, генеративка, авторство, ризики'],
+      ['Тебе хакнули — тепер судись', '💻 кібербезпека, витоки, цифрові злочини'],
+      ['Стартап без штанів', '🚀 IT, tech, продукти, захист бізнесу'],
+      ['Претензія Mode On', '📬 досудові штуки: як грамотно “пред’явити”'],
+      ['Кейсовий щит', '🛡️ супровід бізнесу, щит на всі випадки'],
+      ['Все складно — пишу Legist’у', '📱 універсальний блок: «про все», якщо страшно і незрозуміло']
+    ];
+    const enTitles = [
+      ['CourtShock', '🧾 challenges, lawsuits, legal proceedings'],
+      ['Debt Series', '💸 debts, enforcement, money recovery'],
+      ['Lost Contracts', '📄 contracts with creators, freelancers, clients'],
+      ['Authorship ≠ "oops, I made it"', '✍️ copyright, content, internet & real rights'],
+      ['Barter Trap', '📸 collabs, influencers, ad integrations'],
+      ['Branded & Protected', '™️ trademarks, names, logos, naming'],
+      ['AI Gone Wild', '🤖 AI, generative tech, authorship, risks'],
+      ['Hacked? Sue Them', '💻 cybersecurity, leaks, digital crimes'],
+      ['Startup in Underwear', '🚀 IT, tech, product, business protection'],
+      ['Claim Mode On', '📬 pre-trial stuff: how to "make a claim" smartly'],
+      ['Case Shield', '🛡️ business support, shield for all occasions'],
+      ['It’s a mess — texting Legist', '📱 universal block: when it’s scary & unclear']
+    ];
     function renderGrid(lang) {
       const grid = document.getElementById('tableGrid');
       grid.innerHTML = '';
-      tables[lang].forEach((text, i) => {
+      const data = lang === 'ua' ? uaTitles : enTitles;
+      data.forEach(([title, desc], i) => {
         const div = document.createElement('div');
         div.className = 'tile';
-        div.innerHTML = `<h3>${text}</h3><p>Lorem ipsum dolor sit amet...</p>`;
+        div.onclick = () => location.href = `table_${i + 1}.html`;
+        div.innerHTML = `
+          <h3>${title}</h3>
+          <div class="divider"></div>
+          <p>${desc}</p>
+        `;
+        setTimeout(() => div.style.opacity = 1, i * 100);
         grid.appendChild(div);
       });
     }
     function switchLang(lang) {
       renderGrid(lang);
-      document.getElementById('titleText').textContent = (lang === 'ua') ? '12 Всраточних Таблиць Юрні' : '12 Legal Jurnya Tables';
+      document.getElementById('titleText').textContent = lang === 'ua' ? '12 Всраточних Таблиць Юрні' : '12 Legal Jurnya Tables';
       document.querySelectorAll('.nav-link').forEach(link => {
         link.textContent = lang === 'ua' ? link.getAttribute('data-ua') : link.getAttribute('data-en');
       });
